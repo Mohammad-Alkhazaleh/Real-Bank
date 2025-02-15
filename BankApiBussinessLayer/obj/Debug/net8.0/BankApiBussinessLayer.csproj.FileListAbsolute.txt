@@ -1,0 +1,16 @@
+D:\BankAPI\BankApiBussinessLayer\bin\Debug\net8.0\BankApiBussinessLayer.deps.json
+D:\BankAPI\BankApiBussinessLayer\bin\Debug\net8.0\BankApiBussinessLayer.dll
+D:\BankAPI\BankApiBussinessLayer\bin\Debug\net8.0\BankApiBussinessLayer.pdb
+D:\BankAPI\BankApiBussinessLayer\bin\Debug\net8.0\BankApiDataAccessLayer.dll
+D:\BankAPI\BankApiBussinessLayer\bin\Debug\net8.0\BankApiDataAccessLayer.pdb
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiBussinessLayer.csproj.AssemblyReference.cache
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiBussinessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiBussinessLayer.AssemblyInfoInputs.cache
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiBussinessLayer.AssemblyInfo.cs
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiBussinessLayer.csproj.CoreCompileInputs.cache
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiBussinessLayer.sourcelink.json
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiB.3B05DF9C.Up2Date
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiBussinessLayer.dll
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\refint\BankApiBussinessLayer.dll
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\BankApiBussinessLayer.pdb
+D:\BankAPI\BankApiBussinessLayer\obj\Debug\net8.0\ref\BankApiBussinessLayer.dll

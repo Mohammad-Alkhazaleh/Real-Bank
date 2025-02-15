@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BankApiDataAccessLayer;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,7 @@ namespace BankApiBussinessLayer
         public string PinCode  { set; get; }
         public int PersonID { set; get; }
 
+        public clsClientsDTO ClientDTO { get { return new clsClientsDTO(this.ClientID, this.AccountNumber, this.Balance, this.PinCode, this.PersonID); } }
 
         public clsClients()
         {
@@ -26,7 +29,7 @@ namespace BankApiBussinessLayer
             PinCode = "";
             PersonID = -1;
         }
-        public clsClients(int ClientID, string AccountNumber, decimal Balance, string PinCode ,int PersonID)
+        public clsClients(int ClientID, string AccountNumber, decimal Balance, string PinCode, int PersonID)
         {
             _Mode = enMode.Update;
             this.ClientID = ClientID;
@@ -34,6 +37,11 @@ namespace BankApiBussinessLayer
             this.Balance = Balance;
             this.PinCode = PinCode;
             this.PersonID = PersonID;
+        }
+
+        public static List<clsClientsDTO> GetAllClients()
+        {
+            return clsClientsData.GetAllClients();
         }
         public bool Save()
         {

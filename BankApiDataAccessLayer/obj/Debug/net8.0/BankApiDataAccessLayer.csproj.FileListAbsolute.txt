@@ -1,0 +1,13 @@
+D:\BankAPI\BankApiDataAccessLayer\bin\Debug\net8.0\BankApiDataAccessLayer.deps.json
+D:\BankAPI\BankApiDataAccessLayer\bin\Debug\net8.0\BankApiDataAccessLayer.dll
+D:\BankAPI\BankApiDataAccessLayer\bin\Debug\net8.0\BankApiDataAccessLayer.pdb
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\BankApiDataAccessLayer.csproj.AssemblyReference.cache
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\BankApiDataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\BankApiDataAccessLayer.AssemblyInfoInputs.cache
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\BankApiDataAccessLayer.AssemblyInfo.cs
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\BankApiDataAccessLayer.csproj.CoreCompileInputs.cache
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\BankApiDataAccessLayer.sourcelink.json
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\BankApiDataAccessLayer.dll
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\refint\BankApiDataAccessLayer.dll
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\BankApiDataAccessLayer.pdb
+D:\BankAPI\BankApiDataAccessLayer\obj\Debug\net8.0\ref\BankApiDataAccessLayer.dll

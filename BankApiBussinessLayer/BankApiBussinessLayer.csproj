@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BankApiDataAccessLayer\BankApiDataAccessLayer.csproj" />
+  </ItemGroup>
+
 </Project>

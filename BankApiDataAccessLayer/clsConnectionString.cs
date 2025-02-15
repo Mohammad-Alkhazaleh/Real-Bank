@@ -8,6 +8,6 @@ namespace BankApiDataAccessLayer
 {
     public class clsConnectionString
     {
-        public static string  ConnectionString = "Server=DESKTOP-D961H3G;DataBase=Contacts;Integrated Security=True;TrustServerCertificate=True";
+        public static string  ConnectionString = "Server=DESKTOP-D961H3G;DataBase=BankDB;Integrated Security=True;TrustServerCertificate=True";
     }
 }
