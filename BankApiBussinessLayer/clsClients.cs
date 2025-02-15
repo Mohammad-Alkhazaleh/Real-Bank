@@ -10,8 +10,8 @@ namespace BankApiBussinessLayer
 {
     public class clsClients
     {
-        private enum enMode { AddNew, Update }
-        private enMode _Mode;
+        public enum enMode { AddNew, Update }
+        public enMode _Mode;
         public int ClientID { set; get; }
         public string AccountNumber { set; get; }
         public decimal Balance { set; get; }
@@ -20,28 +20,32 @@ namespace BankApiBussinessLayer
 
         public clsClientsDTO ClientDTO { get { return new clsClientsDTO(this.ClientID, this.AccountNumber, this.Balance, this.PinCode, this.PersonID); } }
 
-        public clsClients()
+        public clsClients(clsClientsDTO cDto, enMode Mode = enMode.AddNew)
         {
-            _Mode = enMode.AddNew;
-            ClientID = -1;
-            AccountNumber = "";
-            Balance = 0;
-            PinCode = "";
-            PersonID = -1;
-        }
-        public clsClients(int ClientID, string AccountNumber, decimal Balance, string PinCode, int PersonID)
-        {
-            _Mode = enMode.Update;
-            this.ClientID = ClientID;
-            this.AccountNumber = AccountNumber;
-            this.Balance = Balance;
-            this.PinCode = PinCode;
-            this.PersonID = PersonID;
+            this.ClientID = cDto.ClientID;
+            this.AccountNumber = cDto.AccountNumber;
+            this.Balance = cDto.Balance;
+            this.PinCode = cDto.PinCode;
+            this.PersonID = cDto.PersonID;
+            this._Mode = Mode;
         }
 
         public static List<clsClientsDTO> GetAllClients()
         {
             return clsClientsData.GetAllClients();
+        }
+        public static clsClients GetClientByID(int ClientID)
+        {
+            clsClientsDTO ClientDTO = new clsClientsDTO();
+            if ((ClientDTO = clsClientsData.Find(ClientID)) != null)
+            {
+                return new clsClients(ClientDTO, enMode.Update);
+            }
+            else
+            {
+                return null;
+            }
+            
         }
         public bool Save()
         {

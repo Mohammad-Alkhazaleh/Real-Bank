@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Reflection.PortableExecutable;
@@ -63,6 +64,36 @@ namespace BankApiDataAccessLayer
                 }
             
             return Clients;
+        }
+        public static clsClientsDTO Find(int ClientID)
+        {
+            clsClientsDTO ClientDTO = new clsClientsDTO();
+            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+            {
+                using (SqlCommand Command = new SqlCommand("[dbo].[FindClient]",Connection))
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.Parameters.AddWithValue("@ClientID",ClientID);
+                    Connection.Open();
+                    using (SqlDataReader reader = Command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            ClientDTO = new clsClientsDTO
+                           (
+                           ClientID,
+                           reader.GetString(reader.GetOrdinal("AccountNumber")),
+                           reader.GetDecimal(reader.GetOrdinal("Balance")),
+                           reader.GetString(reader.GetOrdinal("PinCode")),
+                           reader.GetInt32(reader.GetOrdinal("PersonID"))
+                           );
+                        }
+                       
+                    }
+                         
+                }
+            }
+            return ClientDTO;
         }
         }
  }
