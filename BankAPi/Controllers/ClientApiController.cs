@@ -42,5 +42,24 @@ namespace BankAPi.Controllers
             return Ok(CDTO);
 
         }
+
+        [HttpPost("AddNewClient")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
+        public ActionResult<clsClientsDTO> GetClientByID(clsClientsDTO ClientDTO)
+        {
+            if (ClientDTO.ClientID <0 || ClientDTO.PersonID <0 || ClientDTO.AccountNumber==string.Empty ||ClientDTO.Balance==0 ||ClientDTO.PinCode ==string.Empty || ClientDTO ==null)
+            {
+                return BadRequest("Invalid Client Data ! ");
+            }
+            clsClients Client = new clsClients(ClientDTO);
+            if (!Client.Save())
+            {
+                return BadRequest("Client failed to save successfully !");
+            }
+            return Ok(Client.ClientDTO);
+        }
     }
 }

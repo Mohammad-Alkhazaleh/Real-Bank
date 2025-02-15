@@ -44,8 +44,12 @@ namespace BankApiBussinessLayer
             else
             {
                 return null;
-            }
-            
+            }   
+        }
+        private bool _AddNewClient()
+        {
+            ClientID = clsClientsData.AddNewClient(ClientDTO);
+            return ClientID != -1;
         }
         public bool Save()
         {
@@ -53,7 +57,15 @@ namespace BankApiBussinessLayer
             {
                 case enMode.AddNew:
                     {
-                        break;
+                        if (_AddNewClient())
+                        {
+                            _Mode = enMode.Update;
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                 case enMode.Update:
                     {
