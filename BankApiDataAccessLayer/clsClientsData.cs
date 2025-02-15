@@ -121,5 +121,24 @@ namespace BankApiDataAccessLayer
             }
 
             }
-       }
+
+        public static  bool UpdateClient(clsClientsDTO ClientDTO)
+        {
+            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+            {
+                using (SqlCommand Command = new SqlCommand("[dbo].[UpdateClient]",Connection))
+                {
+                    Command.Parameters.AddWithValue("@ClientID", ClientDTO.ClientID);
+                    Command.Parameters.AddWithValue("@AccountNumber", ClientDTO.AccountNumber);
+                    Command.Parameters.AddWithValue("@Balance", ClientDTO.Balance);
+                    Command.Parameters.AddWithValue("@PinCode", ClientDTO.PinCode);
+                    Command.Parameters.AddWithValue("@PersonID", ClientDTO.PersonID);
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Connection.Open();
+                   return ( Command.ExecuteNonQuery()>0);
+                }
+            }
+
+        }
+    }
  }

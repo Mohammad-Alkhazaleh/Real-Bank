@@ -51,6 +51,10 @@ namespace BankApiBussinessLayer
             ClientID = clsClientsData.AddNewClient(ClientDTO);
             return ClientID != -1;
         }
+        private bool _UpdateClient()
+        {
+            return clsClientsData.UpdateClient(ClientDTO);
+        }
         public bool Save()
         {
             switch (_Mode)
@@ -69,7 +73,7 @@ namespace BankApiBussinessLayer
                     }
                 case enMode.Update:
                     {
-                        break;
+                        return _UpdateClient() ;
                     }
             }
             return false;

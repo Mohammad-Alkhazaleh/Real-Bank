@@ -46,7 +46,7 @@
   },
   {
     "ContainingType": "BankAPi.Controllers.ClientApiController",
-    "Method": "GetClientByID",
+    "Method": "AddNewClient",
     "RelativePath": "api/ClientApi/AddNewClient",
     "HttpMethod": "POST",
     "IsController": true,
@@ -105,6 +105,50 @@
           "text/json"
         ],
         "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "BankAPi.Controllers.ClientApiController",
+    "Method": "UpdateClient",
+    "RelativePath": "api/ClientApi/UpdateClient",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ClientDTO",
+        "Type": "BankApiDataAccessLayer.clsClientsDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BankApiDataAccessLayer.clsClientsDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
       },
       {
         "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
