@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,9 +36,35 @@ namespace BankApiDataAccessLayer
             this.Permissions = Permissions;
             this.PersonID = PersonID;
         }
+    }
         public class clsUsersData
         {
+            public static List<clsUsersDTO> GetAllUsers()
+            {
+                List<clsUsersDTO> ListUsers = new List<clsUsersDTO>(); 
+                using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+                {
+                Connection.Open();
+                    using (SqlCommand Command = new SqlCommand("[dbo].[GetAllUsers]",Connection))
+                    {
+                        using (SqlDataReader reader = Command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                                ListUsers.Add(new clsUsersDTO(
 
-        }
+                                 reader.GetInt32(reader.GetOrdinal("UserID")),
+                                reader.GetString(reader.GetOrdinal("UserName")),
+                                reader.GetString(reader.GetOrdinal("Password")),
+                                reader.GetInt32(reader.GetOrdinal("UserPermissions")),
+                                reader.GetInt32(reader.GetOrdinal("PersonID"))
+                                 ));
+                        }
+                        
+
+                        }
+                    }
+                return ListUsers;
+                }
+            }
     }
-}
+

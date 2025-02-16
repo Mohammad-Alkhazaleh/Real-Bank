@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankApiDataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace BankApiBussinessLayer
         public string Password { set; get; }
         public int Permissions { set; get; }
         public int PersonID { set; get; }
-
+        public clsUsersDTO UserDTO { get { return new clsUsersDTO(UserID, UserName, Password, Permissions, PersonID); } }
 
         public clsUsers()
         {
@@ -34,6 +35,10 @@ namespace BankApiBussinessLayer
             this.Password = Password;
             this.Permissions = Permissions;
             this.PersonID = PersonID;
+        }
+        public static List<clsUsersDTO> GetAllUsers()
+        {
+            return clsUsersData.GetAllUsers();
         }
         public bool Save()
         {
