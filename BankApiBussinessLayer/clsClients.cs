@@ -78,5 +78,10 @@ namespace BankApiBussinessLayer
             }
             return false;
         }
+
+        public static bool DeleteClientByID(int ClientID) 
+        {
+            return clsClientsData.DeleteClientByID(ClientID);
+        }
     }
 }

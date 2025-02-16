@@ -87,6 +87,24 @@ namespace BankAPi.Controllers
             }
             return Ok(Client.ClientDTO);
         }
-    
+        [HttpDelete("{ClientID}", Name = "DeleteClient")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<object> DeleteClient(int ClientID)
+        {
+            if (ClientID < 1)
+            {
+                return BadRequest("Invalid ClientID ! ");
+            }
+            if (BankApiBussinessLayer.clsClients.GetClientByID(ClientID) ==null)
+            {
+                return BadRequest(new { success = false, message = "No Client with this id !" });
+            }
+            if (!BankApiBussinessLayer.clsClients.DeleteClientByID(ClientID))
+            {
+                return BadRequest(new { success = false, message = "Client failed to delete successfully !" });
+            }
+            return Ok(new { success = true, message = "Client deleted successfully !" });
+        }
     }
 }

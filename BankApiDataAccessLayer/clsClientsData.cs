@@ -88,6 +88,10 @@ namespace BankApiDataAccessLayer
                            reader.GetInt32(reader.GetOrdinal("PersonID"))
                            );
                         }
+                        else
+                        {
+                            ClientDTO = null;
+                        }
                        
                     }
                          
@@ -139,6 +143,19 @@ namespace BankApiDataAccessLayer
                 }
             }
 
+        }
+        public static bool DeleteClientByID(int ClientID)
+        {
+            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+            {
+                using (SqlCommand Command = new SqlCommand("[dbo].[DeleteClient]",Connection))
+                {
+                    Command.Parameters.AddWithValue("@ClientID", ClientID);
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Connection.Open();
+                    return Command.ExecuteNonQuery()>0;
+                }
+            }
         }
     }
  }

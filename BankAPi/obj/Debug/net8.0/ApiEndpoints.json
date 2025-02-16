@@ -46,6 +46,38 @@
   },
   {
     "ContainingType": "BankAPi.Controllers.ClientApiController",
+    "Method": "DeleteClient",
+    "RelativePath": "api/ClientApi/{ClientID}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ClientID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      }
+    ],
+    "EndpointName": "DeleteClient"
+  },
+  {
+    "ContainingType": "BankAPi.Controllers.ClientApiController",
     "Method": "AddNewClient",
     "RelativePath": "api/ClientApi/AddNewClient",
     "HttpMethod": "POST",
