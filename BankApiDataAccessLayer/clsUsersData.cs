@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,6 +66,34 @@ namespace BankApiDataAccessLayer
                     }
                 return ListUsers;
                 }
+        public static clsUsersDTO GetUserByID(int UserID)
+        {
+            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+            {
+                
+                using (SqlCommand Command  = new SqlCommand("[dbo].FindUser",Connection) )
+                {
+                    
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.Parameters.AddWithValue("@UserID", UserID);
+                    Connection.Open();
+                    using (SqlDataReader reader = Command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new clsUsersDTO(UserID, reader.GetString(reader.GetOrdinal("UserName")),
+                                reader.GetString(reader.GetOrdinal("Password")) , reader.GetInt32(reader.GetOrdinal("UserPermissions")),
+                                reader.GetInt32(reader.GetOrdinal("PersonID"))); 
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+
+                }
+            }
+        }
             }
     }
 

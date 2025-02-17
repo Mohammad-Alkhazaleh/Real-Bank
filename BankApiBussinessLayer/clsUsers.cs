@@ -9,8 +9,8 @@ namespace BankApiBussinessLayer
 {
     public class clsUsers
     {
-        private enum enMode { AddNew, Update }
-        private enMode _Mode;
+        public enum enMode { AddNew, Update }
+        public enMode _Mode;
         public int UserID { set; get; }
         public string UserName { set; get; }
         public string Password { set; get; }
@@ -27,14 +27,14 @@ namespace BankApiBussinessLayer
             Permissions = 0;
             PersonID = -1;
         }
-        public clsUsers(int UserID, string UserName, string Password, int Permissions, int PersonID)
+        public clsUsers( clsUsersDTO UserDTO, enMode Mode = enMode.AddNew)
         {
-            _Mode = enMode.Update;
-            this.UserID = UserID;
-            this.UserName = UserName;
-            this.Password = Password;
-            this.Permissions = Permissions;
-            this.PersonID = PersonID;
+            _Mode = Mode;
+            this.UserID = UserDTO.UserID;
+            this.UserName = UserDTO.UserName;
+            this.Password = UserDTO.Password;
+            this.Permissions = UserDTO.Permissions;
+            this.PersonID = UserDTO.PersonID;
         }
         public static List<clsUsersDTO> GetAllUsers()
         {
@@ -54,6 +54,18 @@ namespace BankApiBussinessLayer
                     }
             }
             return false;
+        }
+        public static clsUsers GetUserByID(int UserID)
+        {
+            clsUsersDTO UserDTO = new clsUsersDTO();
+           if((UserDTO = clsUsersData.GetUserByID(UserID) )!= null)
+            {
+                return new clsUsers(UserDTO,enMode.Update);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
