@@ -46,6 +46,10 @@ namespace BankApiBussinessLayer
             UserID = clsUsersData.AddNewUser(UserDTO);
             return UserID != -1;
         }
+        private bool _UpdateUser()
+        {
+            return clsUsersData.UpdateUser(UserDTO);
+        }
         public bool Save()
         {
             switch (_Mode)
@@ -64,7 +68,7 @@ namespace BankApiBussinessLayer
                     }
                 case enMode.Update:
                     {
-                        break;
+                        return _UpdateUser();
                     }
             }
             return false;

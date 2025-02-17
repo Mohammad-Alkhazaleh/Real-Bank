@@ -56,8 +56,29 @@ namespace BankAPi.Controllers
                 return BadRequest("User failed to save successfully !");
             }
             return Ok(User.UserDTO);
-
-
+        }
+        [HttpPut("UpdateUser")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<clsUsersDTO> UpdateUser(clsUsersDTO UserDTO)
+        {
+            if (UserDTO.UserID <0 || UserDTO.UserName==string.Empty || UserDTO.Password==string.Empty ||
+                UserDTO.Permissions<-1 || UserDTO.PersonID<0 || UserDTO ==null)
+            {
+                return BadRequest("Invalid Client Data !");
+            }
+            clsUsers User = BankApiBussinessLayer.clsUsers.GetUserByID(UserDTO.UserID);
+            if (User ==null)
+            {
+                return BadRequest("No user with this ID !");
+            }
+            User = new clsUsers(UserDTO ,clsUsers.enMode.Update);
+            if (!User.Save())
+            {
+                return BadRequest("User failed to update successfully !");
+            }
+            return Ok(User.UserDTO);
         }
     }
 

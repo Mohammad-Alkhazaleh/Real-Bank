@@ -118,6 +118,23 @@ namespace BankApiDataAccessLayer
                 }
             }
         }
+        public static  bool UpdateUser(clsUsersDTO UserDTO)
+        {
+            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+            {
+                using (SqlCommand Command = new SqlCommand("[dbo].[UpdateUser]",Connection))
+                {
+                    Command.Parameters.AddWithValue("@UserName", UserDTO.UserName);
+                    Command.Parameters.AddWithValue("@Password", UserDTO.Password);
+                    Command.Parameters.AddWithValue("@UserPermissions", UserDTO.Permissions);
+                    Command.Parameters.AddWithValue("@PersonID", UserDTO.PersonID);
+                    Command.Parameters.AddWithValue("@UserID", UserDTO.UserID);
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Connection.Open();
+                    return Command.ExecuteNonQuery()>0;
+                }
+            }
+        }
     }
 }
 
