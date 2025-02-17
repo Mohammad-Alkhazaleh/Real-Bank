@@ -231,6 +231,50 @@
   },
   {
     "ContainingType": "BankAPi.Controllers.UserApiController",
+    "Method": "AddNewClient",
+    "RelativePath": "api/UserApi/AddNewUser",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserDTO",
+        "Type": "BankApiDataAccessLayer.clsUsersDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BankApiDataAccessLayer.clsClientsDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ]
+  },
+  {
+    "ContainingType": "BankAPi.Controllers.UserApiController",
     "Method": "GetAllUsers",
     "RelativePath": "api/UserApi/GetAllUsers",
     "HttpMethod": "GET",

@@ -39,6 +39,26 @@ namespace BankAPi.Controllers
             }
             return Ok(User.UserDTO);
         }
+
+        [HttpPost("AddNewUser")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<clsClientsDTO> AddNewClient(clsUsersDTO UserDTO)
+        {
+            if (UserDTO.UserName ==string.Empty|| UserDTO.Password == string.Empty || UserDTO.PersonID <0 || UserDTO.Permissions <-1 )
+            {
+                return BadRequest("Invalid Client Data ! ");
+            }
+            BankApiBussinessLayer.clsUsers User = new clsUsers(UserDTO,clsUsers.enMode.AddNew);
+            if (!User.Save())
+            {
+                return BadRequest("User failed to save successfully !");
+            }
+            return Ok(User.UserDTO);
+
+
+        }
     }
 
 }

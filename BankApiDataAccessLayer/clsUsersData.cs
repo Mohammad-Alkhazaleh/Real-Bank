@@ -94,6 +94,30 @@ namespace BankApiDataAccessLayer
                 }
             }
         }
+        public static int AddNewUser(clsUsersDTO UserDTO)
+        {
+            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+            {
+                using (SqlCommand Command = new SqlCommand("[dbo].[AddNewUser]", Connection))
+                {
+                    
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.Parameters.AddWithValue("@UserName", UserDTO.UserName);
+                    Command.Parameters.AddWithValue("@Password", UserDTO.Password);
+                    Command.Parameters.AddWithValue("@UserPermissions", UserDTO.Permissions);
+                    Command.Parameters.AddWithValue("@PersonID", UserDTO.PersonID);
+                    var OutPutIdParameter = new SqlParameter("@UserID", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    Command.Parameters.Add(OutPutIdParameter);
+                    Connection.Open();
+                    Command.ExecuteNonQuery();
+                    return (int)OutPutIdParameter.Value;
+
+                }
             }
+        }
     }
+}
 

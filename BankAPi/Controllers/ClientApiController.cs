@@ -50,7 +50,7 @@ namespace BankAPi.Controllers
 
         public ActionResult<clsClientsDTO> AddNewClient(clsClientsDTO ClientDTO)
         {
-            if (ClientDTO.ClientID < 0 || ClientDTO.PersonID < 0 || ClientDTO.AccountNumber == string.Empty || ClientDTO.Balance == 0 || ClientDTO.PinCode == string.Empty || ClientDTO == null)
+            if ( ClientDTO.PersonID < 0 || ClientDTO.AccountNumber == string.Empty || ClientDTO.Balance == 0 || ClientDTO.PinCode == string.Empty || ClientDTO == null)
             {
                 return BadRequest("Invalid Client Data ! ");
             }

@@ -40,13 +40,27 @@ namespace BankApiBussinessLayer
         {
             return clsUsersData.GetAllUsers();
         }
+
+        private bool _AddNewUser()
+        {
+            UserID = clsUsersData.AddNewUser(UserDTO);
+            return UserID != -1;
+        }
         public bool Save()
         {
             switch (_Mode)
             {
                 case enMode.AddNew:
                     {
-                        break;
+                        if (_AddNewUser())
+                        {
+                            _Mode = enMode.Update;
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                 case enMode.Update:
                     {
