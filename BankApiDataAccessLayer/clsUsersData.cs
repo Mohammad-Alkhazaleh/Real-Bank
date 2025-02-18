@@ -135,6 +135,27 @@ namespace BankApiDataAccessLayer
                 }
             }
         }
+        public static int DeleteUser(int UserID)
+        {
+            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+            {
+                using (SqlCommand Command = new SqlCommand("[dbo].[DeleteUser]", Connection))
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.Parameters.AddWithValue("@UserID", UserID);
+                    var OutPutIdParameter = new SqlParameter("@RowsAffected", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    Command.Parameters.Add(OutPutIdParameter);
+                    Connection.Open();
+                    Command.ExecuteNonQuery();
+                    return (int)OutPutIdParameter.Value;
+
+
+                }
+            }
+        }
     }
 }
 

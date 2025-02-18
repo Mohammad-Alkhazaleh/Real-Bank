@@ -80,6 +80,31 @@ namespace BankAPi.Controllers
             }
             return Ok(User.UserDTO);
         }
+        [HttpDelete("{UserID}",Name = "DeleteUser")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<object> DeleteUser(int UserID)
+        {
+            if (UserID<0)
+            {
+                return BadRequest( new { success = false, message = "Invalid userID !" });
+            }
+            int AffRows = 0;
+            if ((AffRows = BankApiBussinessLayer.clsUsers.DeleteUser(UserID))>0)
+            {
+                return Ok(new { success = true, message = "User deleted successfully !" });
+            }
+            else if(AffRows ==0)
+            {
+                return NotFound(new { success = false, message = "No user with this ID !" });
+            }
+            else
+            {
+                return BadRequest(new { success = false, message = "User failed to delete successfully!" });
+            }
+
+        }
     }
 
 }
