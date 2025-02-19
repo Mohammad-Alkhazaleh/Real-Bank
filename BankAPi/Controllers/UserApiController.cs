@@ -39,6 +39,24 @@ namespace BankAPi.Controllers
             }
             return Ok(User.UserDTO);
         }
+        [HttpGet("{UserName}/{Password}", Name = "CheckUserLogin")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<clsUsersDTO> CheckUserLogin(string UserName , string Password)
+        {
+            if (UserName == string.Empty || Password == string.Empty)
+            {
+                return BadRequest("Invalid User data !" );
+            }
+            clsUsers User = new clsUsers();
+            clsUsersDTO UserDTO1 = new clsUsersDTO(1000, UserName , Password  ,-1 ,1);
+            if ((User = BankApiBussinessLayer.clsUsers.CheckUserLogin(UserDTO1.UserName, UserDTO1.Password))==null)
+            {
+                return NotFound("No user with this username & password !" );
+            }
+            return Ok(User.UserDTO);
+        }
 
         [HttpPost("AddNewUser")]
         [ProducesResponseType(StatusCodes.Status200OK)]

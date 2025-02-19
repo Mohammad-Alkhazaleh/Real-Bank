@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -71,7 +72,7 @@ namespace BankApiDataAccessLayer
             using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
             {
                 
-                using (SqlCommand Command  = new SqlCommand("[dbo].FindUser",Connection) )
+                using (SqlCommand Command  = new SqlCommand("[dbo].[FindUser]",Connection) )
                 {
                     
                     Command.CommandType = CommandType.StoredProcedure;
@@ -153,6 +154,38 @@ namespace BankApiDataAccessLayer
                     return (int)OutPutIdParameter.Value;
 
 
+                }
+            }
+        }
+        public static clsUsersDTO CheckUserLogin(string UserName , string Password)
+        {
+        
+            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+            {
+               
+                using (SqlCommand Command = new SqlCommand("[dbo].[CheckUserLogin]", Connection))
+                {
+                    Command.CommandType = CommandType.StoredProcedure;
+                    //Command.Parameters.AddWithValue("@UserName", UserName);
+                   // Command.Parameters.AddWithValue("@Password", Password);
+                    Command.Parameters.Add("@UserName", SqlDbType.NVarChar, 50).Value = UserName;
+                    Command.Parameters.Add("@Password", SqlDbType.NVarChar, 20).Value = Password;
+                    Connection.Open();
+                    using (SqlDataReader reader = Command.ExecuteReader())
+                    {
+                        if (reader.Read()) 
+                        {
+                            return new clsUsersDTO(reader.GetInt32(reader.GetOrdinal("UserID")),
+                                UserName , Password ,
+                                reader.GetInt32(reader.GetOrdinal("UserPermissions")),
+                                reader.GetInt32(reader.GetOrdinal("PersonID")));
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+       
                 }
             }
         }

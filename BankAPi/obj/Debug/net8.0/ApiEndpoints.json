@@ -272,6 +272,56 @@
   },
   {
     "ContainingType": "BankAPi.Controllers.UserApiController",
+    "Method": "CheckUserLogin",
+    "RelativePath": "api/UserApi/{UserName}/{Password}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserName",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "BankApiDataAccessLayer.clsUsersDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 400
+      },
+      {
+        "Type": "Microsoft.AspNetCore.Mvc.ProblemDetails",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 404
+      }
+    ],
+    "EndpointName": "CheckUserLogin"
+  },
+  {
+    "ContainingType": "BankAPi.Controllers.UserApiController",
     "Method": "AddNewClient",
     "RelativePath": "api/UserApi/AddNewUser",
     "HttpMethod": "POST",

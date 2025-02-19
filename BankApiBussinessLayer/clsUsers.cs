@@ -89,5 +89,17 @@ namespace BankApiBussinessLayer
         {
             return clsUsersData.DeleteUser(UserID);
         }
+        public static clsUsers CheckUserLogin(string UserName , string Password)
+        {
+            clsUsersDTO UserDTO = new clsUsersDTO();
+            if((UserDTO= clsUsersData.CheckUserLogin(UserName , Password))!=null)
+            {
+                return new clsUsers(UserDTO ,enMode.Update);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
