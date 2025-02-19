@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApiBussinessLayer
 {
-    public class clsTransferLog
+    public class clsTransactions
     {
         private enum enMode { AddNew, Update }
         private enMode _Mode;
@@ -20,7 +20,7 @@ namespace BankApiBussinessLayer
 
 
 
-        public clsTransferLog()
+        public clsTransactions()
         {
             _Mode = enMode.AddNew;
             TransferLogID = -1;
@@ -30,7 +30,7 @@ namespace BankApiBussinessLayer
             TransferDate = DateTime.Now;
             UserID = -1;
         }
-        public clsTransferLog(int TransferLogID, int ClientID_Sender, int ClientID_Reciever, decimal TransferAmount, DateTime TransferDate, int UserID)
+        public clsTransactions(int TransferLogID, int ClientID_Sender, int ClientID_Reciever, decimal TransferAmount, DateTime TransferDate, int UserID)
         {
             _Mode = enMode.Update;
            this.TransferLogID = TransferLogID;
@@ -39,6 +39,10 @@ namespace BankApiBussinessLayer
            this.TransferAmount = TransferAmount;
            this.TransferDate = TransferDate;
            this.UserID = UserID;
+
+        }
+        public static bool Deposit(int ClientID, decimal Amount)
+        {
 
         }
         public bool Save()

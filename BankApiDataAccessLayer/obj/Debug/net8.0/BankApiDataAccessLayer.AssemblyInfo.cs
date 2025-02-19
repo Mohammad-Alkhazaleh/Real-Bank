@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BankApiDataAccessLayer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2082e014024df3575bf39b4df3c1874b59edcb7e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18d4a448b0f2f6181b0521b3436fdce760f60717")]
 [assembly: System.Reflection.AssemblyProductAttribute("BankApiDataAccessLayer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BankApiDataAccessLayer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

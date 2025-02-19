@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApiDataAccessLayer
 {
-    public class clsTransferLogDTO
+    public class clsTransactionsDTO
     {
         private enum enMode { AddNew, Update }
         private enMode _Mode;
@@ -20,7 +20,7 @@ namespace BankApiDataAccessLayer
 
 
 
-        public clsTransferLogDTO()
+        public clsTransactionsDTO()
         {
             _Mode = enMode.AddNew;
             TransferLogID = -1;
@@ -30,7 +30,7 @@ namespace BankApiDataAccessLayer
             TransferDate = DateTime.Now;
             UserID = -1;
         }
-        public clsTransferLogDTO(int TransferLogID, int ClientID_Sender, int ClientID_Reciever, decimal TransferAmount, DateTime TransferDate, int UserID)
+        public clsTransactionsDTO(int TransferLogID, int ClientID_Sender, int ClientID_Reciever, decimal TransferAmount, DateTime TransferDate, int UserID)
         {
             _Mode = enMode.Update;
             this.TransferLogID = TransferLogID;
@@ -41,7 +41,7 @@ namespace BankApiDataAccessLayer
             this.UserID = UserID;
 
         }
-        public class clsTransferLogData
+        public class clsTransactionsData
         {
 
         }
