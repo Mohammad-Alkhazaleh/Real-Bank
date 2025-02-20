@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankApiDataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,10 +42,11 @@ namespace BankApiBussinessLayer
            this.UserID = UserID;
 
         }
-        public static bool Deposit(int ClientID, decimal Amount)
+        public static bool Transactions(string ClientAccountNumber, decimal Amount)
         {
-
+            return clsTransactionsData.Transactions(ClientAccountNumber, Amount);
         }
+      
         public bool Save()
         {
             switch (_Mode)

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,9 +43,32 @@ namespace BankApiDataAccessLayer
             this.UserID = UserID;
 
         }
+    }
         public class clsTransactionsData
         {
-
-        }
+            public static bool Transactions(string ClientAccountNumber, decimal Amount)
+            {
+                using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
+                {
+                    using (SqlCommand Command = new SqlCommand("[dbo].[Transactions]",Connection))
+                    {
+                        Command.CommandType = CommandType.StoredProcedure;
+                        Command.Parameters.AddWithValue("@AccountNumber", ClientAccountNumber);
+                        Command.Parameters.AddWithValue("@Amount", Amount);
+                        Connection.Open();
+                    try
+                    {
+                        return Command.ExecuteNonQuery() > 0;
+                    }
+                    catch (SqlException ex)
+                    { 
+                            return false;
+                    }
+                    }
+                }
+            }
+      
+        
     }
+    
 }
