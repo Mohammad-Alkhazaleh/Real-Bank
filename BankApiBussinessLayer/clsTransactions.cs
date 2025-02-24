@@ -46,7 +46,20 @@ namespace BankApiBussinessLayer
         {
             return clsTransactionsData.Transactions(ClientAccountNumber, Amount);
         }
-      
+        public static List<clsBalancesDTO> GetAllBalances()
+        {
+            return clsTransactionsData.GetAllBalances();
+        }
+        public static int TransferOperation(clsTransferDTO TransferDTO)
+        {
+            return clsTransactionsData.TransferOperation(TransferDTO);
+
+        }
+        public static List<clsTransferLogsDTO> GetAllTransferLogs()
+        {
+            return clsTransactionsData.GetAllTransferLogs();
+        }
+
         public bool Save()
         {
             switch (_Mode)

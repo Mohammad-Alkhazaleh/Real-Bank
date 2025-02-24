@@ -101,30 +101,45 @@ namespace BankApiDataAccessLayer
         }
         public static int AddNewClient(clsClientsDTO ClientDTO)
         {
-            
-            using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString))
-            {
-                using (SqlCommand Command = new SqlCommand("[dbo].[AddNewClient]", Connection))
-                {
-                    Command.CommandType = CommandType.StoredProcedure;
-                   
-                    Command.Parameters.AddWithValue("@AccountNumber", ClientDTO.AccountNumber);
-                    Command.Parameters.AddWithValue("@Balance", ClientDTO.Balance);
-                    Command.Parameters.AddWithValue("@PinCode", ClientDTO.PinCode);
-                    Command.Parameters.AddWithValue("@PersonID", ClientDTO.PersonID);
-                    var OutPutIdParameter = new SqlParameter("@NewClientID", SqlDbType.Int)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    Command.Parameters.Add(OutPutIdParameter);
-                    Connection.Open();
-                    Command.ExecuteNonQuery();
-                    return (int)OutPutIdParameter.Value;
+            int newClientId = -1; // قيمة افتراضية في حالة الفشل
 
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsConnectionString.ConnectionString)) // تأكد من تعريف Connection.ConnectionString
+                {
+                    using (SqlCommand command = new SqlCommand("[dbo].[AddNewClient]", Connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // إضافة المعاملات
+                        command.Parameters.AddWithValue("@AccountNumber", ClientDTO.AccountNumber);
+                        command.Parameters.AddWithValue("@Balance", ClientDTO.Balance);
+                        command.Parameters.AddWithValue("@PinCode", ClientDTO.PinCode);
+                        command.Parameters.AddWithValue("@PersonID", ClientDTO.PersonID);
+
+                        // إضافة معامل الإخراج
+                        var outPutIdParameter = new SqlParameter("@NewClientID", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        command.Parameters.Add(outPutIdParameter);
+
+                        Connection.Open();
+                        command.ExecuteNonQuery();
+
+                        // استخدام Convert.ToInt32 لتجنب الخطأ عند التعامل مع NULL
+                        newClientId = Convert.ToInt32(outPutIdParameter.Value);
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                // سجل الخطأ أو قم بمعالجته حسب الحاجة
+                Console.WriteLine("Error: " + ex.Message);
             }
+
+            return newClientId;
+        }
 
         public static  bool UpdateClient(clsClientsDTO ClientDTO)
         {
