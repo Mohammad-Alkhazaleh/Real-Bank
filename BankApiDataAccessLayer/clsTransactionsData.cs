@@ -157,8 +157,8 @@ namespace BankApiDataAccessLayer
                 using (SqlCommand Command = new SqlCommand("[dbo].[TransferOperation]", Connection))
                 {
                     Command.CommandType = CommandType.StoredProcedure;
-                    Command.Parameters.AddWithValue("@AccountNumber1", TransferDTO.AccountNumber_Sender);
-                    Command.Parameters.AddWithValue("@AccountNumber2", TransferDTO.AccountNumber_Receiver);
+                    Command.Parameters.Add("@AccountNumber1", SqlDbType.VarChar, 10).Value = TransferDTO.AccountNumber_Sender;
+                    Command.Parameters.Add("@AccountNumber2", SqlDbType.VarChar, 10).Value = TransferDTO.AccountNumber_Receiver;
                     Command.Parameters.AddWithValue("@Amount", TransferDTO.Amount);
                     Command.Parameters.AddWithValue("@UserID", TransferDTO.UserID);
                     Connection.Open();
