@@ -192,16 +192,18 @@ namespace BankApiDataAccessLayer
 
                     using (SqlDataReader reader = Command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (reader.HasRows) {
+                            while(reader.Read())
                         {
-                            Logs.Add(new clsTransferLogsDTO(reader.GetDateTime(reader.GetOrdinal("TransferDate")),
-                            reader.GetString(reader.GetOrdinal("AccountNumber_Sender")),
-                            reader.GetString(reader.GetOrdinal("AccountNumber_Receiver")),
-                            reader.GetDecimal(reader.GetOrdinal("TransferAmount")),
-                            reader.GetDecimal(reader.GetOrdinal("Balance_Sender")),
-                            reader.GetDecimal(reader.GetOrdinal("Balance_Receiver")),
-                            reader.GetString(reader.GetOrdinal("UserName"))
-                            )); 
+                                Logs.Add(new clsTransferLogsDTO(reader.GetDateTime(reader.GetOrdinal("TransferDate")),
+                                reader.GetString(reader.GetOrdinal("AccountNumber_Sender")),
+                                reader.GetString(reader.GetOrdinal("AccountNumber_Receiver")),
+                                reader.GetDecimal(reader.GetOrdinal("TransferAmount")),
+                                reader.GetDecimal(reader.GetOrdinal("Balance_Sender")),
+                                reader.GetDecimal(reader.GetOrdinal("Balance_Receiver")),
+                                reader.GetString(reader.GetOrdinal("UserName"))
+                                ));
+                            } 
                         }
                         return Logs;
                     }
