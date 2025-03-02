@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankApiDataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,11 @@ namespace BankApiBussinessLayer
             this.CurrencyName = CurrencyName;
             this.Rate = Rate;
         }
+
+        public static bool UpdateRate(clsCurrenciesDTO CurrencyDTO , int UserID)
+        {
+            return clsCurrenciesData.UpdateRate(CurrencyDTO , UserID);
+        }
         public bool Save()
         {
             switch (_Mode)
@@ -50,6 +56,31 @@ namespace BankApiBussinessLayer
             }
             return false;
         }
-
+        public static decimal CurrencyCalculater(string CountryCode_NameFrom,
+           string CountryCode_NameTo, decimal Amount, int UserID)
+        {
+            return clsCurrenciesData.CurrencyCalculater(CountryCode_NameFrom, CountryCode_NameTo,
+                Amount , UserID);
+        }
+        public static List<clsCurrenciesDTO> GetAllCurrencies()
+        {
+            return clsCurrenciesData.GetAllCurrencies();
+        }
+        public static List<string> GetAllCountryCode_Name()
+        {
+            return clsCurrenciesData.GetAllCountryCode_Name();
+        }
+        public static List<string> GetAllCountryCode()
+        {
+            return clsCurrenciesData.GetAllCountryCode();
+        }
+        public static List<string> GetAllCountryNames()
+        {
+            return clsCurrenciesData.GetAllCountryNames();
+        }
+        public static decimal GetRateByCountryName(string CountryName)
+        {
+            return clsCurrenciesData.GetRateByCountryName( CountryName);
+        }
     }
 }

@@ -1,16 +1,18 @@
-﻿using System.Globalization;
+﻿using BankApiDataAccessLayer;
+using System.Globalization;
 
 namespace BankApiBussinessLayer
 {
     public class clsPeople
     {
-        private enum enMode { AddNew , Update}
-        private enMode _Mode;
+        public enum enMode { AddNew, Update }
+        public enMode _Mode;
         public int PersonID { set; get; }
-        public string  FirstName { set; get; }
+        public string FirstName { set; get; }
         public string LastName { set; get; }
         public string Email { set; get; }
         public string Phone { set; get; }
+        public clsPeopleDTO PersonDTO { get{ return new clsPeopleDTO(PersonID,FirstName,LastName,Email,Phone); } }
         
         public clsPeople()
         {
@@ -21,14 +23,39 @@ namespace BankApiBussinessLayer
             Email = "";
             Phone = "";
         }
-        public clsPeople(int PersonID ,string FirstName , string LastName ,string Email ,string Phone)
+        public clsPeople(clsPeopleDTO peopleDTO, enMode Mode =enMode.AddNew)
         {
-            _Mode = enMode.Update;
-            this.PersonID = PersonID;
-            this.FirstName = FirstName;
-            this.LastName = LastName;
-            this.Email = Email;
-            this.Phone = Phone;
+            _Mode = Mode;
+            this.PersonID = peopleDTO.PersonID;
+            this.FirstName = peopleDTO.FirstName;
+            this.LastName = peopleDTO.LastName;
+            this.Email = peopleDTO.Email;
+            this.Phone = peopleDTO.Phone;
+        }
+        private bool _AddNewPerson()
+        {
+            PersonID = clsPeopleData.AddNewPerson(PersonDTO, BankApiDataAccessLayer.clsGeneralLibrary.UserID);
+            return PersonID != -1 ;
+        }
+        private bool _UpdatePerson()
+        {
+            return clsPeopleData.UpdatePerson(PersonDTO , clsGeneralLibrary.UserID);
+        }
+        public static bool DeletePerson(int PersonID , int UserID)
+        {
+            return clsPeopleData.DeletePerson(PersonID , UserID);
+        }
+        public static clsPeople FindPerson(int PersonID , int UserID)
+        {
+            clsPeopleDTO PersonDTO = new clsPeopleDTO();
+            if((PersonDTO = clsPeopleData.FindPerson(PersonID, UserID))!=null)
+            {
+                return new clsPeople(PersonDTO,enMode.Update);
+            }
+            else
+            {
+                return null;
+            }
         }
         public bool Save()
         {
@@ -36,11 +63,19 @@ namespace BankApiBussinessLayer
             {
                 case enMode.AddNew:
                     {
-                        break;
+                        if (_AddNewPerson())
+                        {
+                            _Mode = enMode.Update;
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                 case enMode.Update:
                     {
-                        break;
+                        return _UpdatePerson();
                     }
             }
             return false;
